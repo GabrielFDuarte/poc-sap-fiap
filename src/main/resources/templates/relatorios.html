@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie-edge"/>
+        <meta name="viewport" content="width=device=width, initial-scale1"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <title>SAP Quick Payment - Relatórios</title>
+        <style th:replace="base :: headStyle"></style>
+        <style>
+            .areaPagamento{
+                margin-left: 13vw;
+                height: 95vh;
+                position: absolute;
+                width: -webkit-fill-available;
+                overflow-y: auto;
+            }
+            .pagamentoTitle{
+                margin-top: 15px;
+            }
+            .pagamentoTitle span{
+                padding-left: 15px;
+                font-size: 23px;
+                color: #383838;
+            }
+            .selecaoOrigem{
+                background-color: #f7f7f7;
+                margin-top: 50px;
+                padding-left: 15px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+            .destinoPagamento{
+                background-color: #f7f7f7;
+                margin-top: 50px;
+                padding-left: 15px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                max-height: 60vh;
+                overflow-y: auto;
+                display: none;
+            }
+            .rodapeRelatorio{
+                background-color: #f7f7f7;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                padding-left: 15px;
+                display: none;
+            }
+            .selecaoOrigem select{
+                margin-left: 7px;
+                border-radius: 2px;
+            }
+            .titleContaOrigem{
+                font-size: 30px;
+            }
+            .origemInfo{
+                font-size: 15px;
+                display: none;
+            }
+            .linhaSup{
+                margin-top: 20px;
+            }
+            .linhaInf{
+                margin-top: 5px;
+            }
+            .listInfo{
+                margin-right: 25px;
+            }
+            .selecaoOrigem span {
+                font-size: 18px;
+            }
+            .pesquisar{
+                float: right;
+                margin-right: 15px;
+            }
+            .infos{
+                display: table;
+            }
+            .textOpt{
+                font-size: 50px;
+            }
+            .infoOptDestinos{
+                float: left;
+            }
+            .infoOptValor{
+                margin-left: 50px;
+                float: right;
+            }
+            .addGraph{
+                float: right;
+                margin-right: 50px;
+            }
+            .tableRelatorio{
+                margin-top: 15px;
+                margin-right: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div th:replace="base :: divTopMenu"></div>
+        <div th:replace="base :: divSideMenu"></div>
+        <div class="areaPagamento">
+            <div>
+                <div class="pagamentoTitle"><span>Relatório Analítico de Pagamentos Realizados</span></div>
+
+                <div class="selecaoOrigem">
+
+                    <span class="titleContaOrigem">Conta Origem:</span>
+                    <select class="selectContaOrigem">
+                        <option value=""></option>
+                        <option value="02.846.056/0001-97">CCR S.A.</option>
+                        <option value="74.099.431/6391-18">STAPEL SISTEMAS</option>
+                        <option value="51.466.860/0001-56">SAO MARTINHO S.A.</option>
+                    </select>
+
+                    <span class="titleDataInicial" style="margin-left: 15px;">Data:</span>
+                    <input type="date" id="dataInicial"/>
+
+                    <span class="titleDataFinal">à</span>
+                    <input type="date" id="dataFinal"/>
+
+                    <button type="button" class="pesquisar btn btn-primary">Pesquisar</button>
+
+                    <div class="origemInfo">
+                        <div class="linhaSup">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Empresa: </b></span>
+                                <span class="nomeEmpresa">NOME EMPRESA</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>CNPJ: </b></span>
+                                <span class="cnpjEmpresa">CNPJ EMPRESA</span>
+                            </div>
+                        </div>
+                        <div class="linhaInf">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Código do Banco: </b></span>
+                                <span>107</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Agência: </b></span>
+                                <span>1</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Conta: </b></span>
+                                <span>91715</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="destinoPagamento">
+                    <div>
+                        <span class="titleContaOrigem">Período: 01/01/2021 - 31/05/2021</span>
+                    </div>
+
+                    <div style="max-width: 35%; height: 50%; margin-top: 15px; position: absolute;">
+                        <canvas id="chartBarras"></canvas>
+                    </div>
+
+                    <div style="max-width: 35%; height: 50%; margin-top: 15px; float: right; margin-right: 250px;">
+                        <canvas id="chartPizza"></canvas>
+                    </div>
+                </div>
+                <div class="rodapeRelatorio">
+                    <div class="addGraph">
+                        <a href="#">Adicionar Gráfico</a>
+                    </div>
+
+                    <div class="infos">
+                        <div class="infoOptDestinos">
+                            <div class="textOpt">
+                                5
+                            </div>
+                            <div>
+                                <a href="#">Destinos de pagamento</a>
+                            </div>
+                        </div>
+                        <div class="infoOptValor">
+                            <div class="textOpt">
+                                R$ 47.998,47
+                            </div>
+                            <div>
+                                <a href="#">Valor total pago no período</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tableRelatorio">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Empresa Favorecida</th>
+                                    <th scope="col">CNPJ</th>
+                                    <th scope="col">Valor Total</th>
+                                    <th scope="col">Qtd. Transações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">INNOTYPE</th>
+                                    <td>15.703.306/4386-90</td>
+                                    <td>R$ 15.359,51</td>
+                                    <td>11</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">SKINIX</th>
+                                    <td>65.155.640/7081-05</td>
+                                    <td>R$ 7.199,77</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ROOXO</th>
+                                    <td>24.911.931/0769-63</td>
+                                    <td>R$ 11.519,63</td>
+                                    <td>9</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">JABBERCUBE</th>
+                                    <td>55.551.506/9221-40</td>
+                                    <td>R$ 1.919,94</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">BABBLEOPIA</th>
+                                    <td>99.247.941/2082-10</td>
+                                    <td>R$ 11.999,62</td>
+                                    <td>8</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn btn-primary">Download</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Exportar</button>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Exportar Relatório</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div style="display: flex; justify-content: center;">
+                                    <img src = "../static/images/qr-code.png" th:src="@{images/qr-code.png}" width="65%"/>
+                                </div>
+                                <div>
+                                    <a href="https://bit.ly/3vUDD3t" target="_blank">Acesso externo ao relatório</a>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+    <script>
+        const ctx = document.getElementById('chartBarras').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+                datasets: [{
+                        label: 'Total Mensal',
+                        data: [12300.67, 19855.50, 3810.00, 5000.00, 7032.30],
+                        backgroundColor: [
+                            'rgba(255, 99, 132)',
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 206, 86)',
+                            'rgba(75, 192, 192)',
+                            'rgba(153, 102, 255)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total Pagamentos: Mensal'
+                    },
+                    legend: {
+                        display: false
+                    },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const ctPizza = document.getElementById('chartPizza').getContext('2d');
+        const myChartPizza = new Chart(ctPizza, {
+            type: 'doughnut',
+            data: {
+                labels: ['INNOTYPE', 'SKINIX', 'ROOXO', 'JABBERCUBE', 'BABBLEOPIA'],
+                datasets: [{
+                        data: [15359.51, 7199.77, 11519.63, 1919.94, 11999.62],
+                        backgroundColor: [
+                            'rgba(255, 99, 132)',
+                            'rgba(54, 162, 235)',
+                            'rgba(255, 206, 86)',
+                            'rgba(75, 192, 192)',
+                            'rgba(153, 102, 255)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 0
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Total Pagamentos: Destino'
+                    }
+                }
+            },
+        });
+
+        myChart.canvas.parentNode.style.height = '30vh';
+        myChart.canvas.parentNode.style.width = '40vw';
+
+        myChartPizza.canvas.parentNode.style.height = '30vh';
+        myChartPizza.canvas.parentNode.style.width = '40vw';
+    </script>
+    <script>
+        $(".selectContaOrigem").on('change', function () {
+            $(".origemInfo").show();
+
+            $(".nomeEmpresa").html($('.selectContaOrigem').find(":selected")[0].label)
+            $(".cnpjEmpresa").html($('.selectContaOrigem').find(":selected").val())
+        })
+
+        $(".pesquisar").on('click', function () {
+            $(".destinoPagamento").show();
+            $(".rodapeRelatorio").show();
+        })
+    </script>
+</html>

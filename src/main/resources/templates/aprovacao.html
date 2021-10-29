@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie-edge"/>
+        <meta name="viewport" content="width=device=width, initial-scale1"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" crossorigin="anonymous"></script>
+        <title>SAP Quick Payment - Aprovação</title>
+        <style th:replace="base :: headStyle"></style>
+        <style>
+            .areaPagamento{
+                margin-left: 13vw;
+                height: 95vh;
+                position: absolute;
+                width: -webkit-fill-available;
+                overflow-y: auto;
+            }
+            .pagamentoTitle{
+                margin-top: 15px;
+            }
+            .pagamentoTitle span{
+                padding-left: 15px;
+                font-size: 23px;
+                color: #383838;
+            }
+            .destinoPagamento{
+                background-color: #f7f7f7;
+                margin-top: 50px;
+                padding-left: 15px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+            .titleContaOrigem{
+                font-size: 25px;
+            }
+            .origemInfo{
+                font-size: 15px;
+                display: none;
+            }
+            .linhaSup{
+                margin-top: 20px;
+            }
+            .listInfo{
+                margin-right: 25px;
+            }
+            .rodape{
+                position: absolute;
+                right: 15px;
+                margin-top: -7px;
+            }
+        </style>
+    </head>
+    <body>
+        <div th:replace="base :: divTopMenu"></div>
+        <div th:replace="base :: divSideMenu"></div>
+        <div class="areaPagamento">
+            <div>
+                <div class="pagamentoTitle"><span>Aprovação de Pagamentos</span></div>
+
+                <div class="destinoPagamento">
+                    <div class="rodape">
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-primary" style="width: 90px;">Aprovar</button>
+                        </div>
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-secondary" style="width: 90px;">Editar</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger" style="width: 90px;">Rejeitar</button>
+                        </div>
+                    </div>
+
+                    <span class="titleContaOrigem">Innotype - R$5.110,40</span>
+
+                    <div class="destinoInfo">
+                        <div class="linhaSup">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>CNPJ: </b></span>
+                                <span>15.703.306/4386-90</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Código do Banco: </b></span>
+                                <span>101</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Agência: </b></span>
+                                <span>1</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Conta: </b></span>
+                                <span>70445</span>
+                            </div>
+                        </div>
+                        <div class="linhaInf">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Tipo de Pagamento: </b></span>
+                                <span>02 - Impostos</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Data de Vencimento: </b></span>
+                                <span>31/05/2021</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Moeda: </b></span>
+                                <span>REA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="destinoPagamento">
+                    <div class="rodape">
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-primary" style="width: 90px;">Aprovar</button>
+                        </div>
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-secondary" style="width: 90px;">Editar</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger" style="width: 90px;">Rejeitar</button>
+                        </div>
+                    </div>
+
+                    <span class="titleContaOrigem">Skinix - R$1.825,44</span>
+
+                    <div class="destinoInfo">
+                        <div class="linhaSup">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>CNPJ: </b></span>
+                                <span>65.155.640/7081-05</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Código do Banco: </b></span>
+                                <span>105</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Agência: </b></span>
+                                <span>1</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Conta: </b></span>
+                                <span>45931</span>
+                            </div>
+                        </div>
+                        <div class="linhaInf">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Tipo de Pagamento: </b></span>
+                                <span>01 - Consumo</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Data de Vencimento: </b></span>
+                                <span>27/05/2021</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Moeda: </b></span>
+                                <span>009</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="destinoPagamento">
+                    <div class="rodape">
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-primary" style="width: 90px;">Aprovar</button>
+                        </div>
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-secondary" style="width: 90px;">Editar</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger" style="width: 90px;">Rejeitar</button>
+                        </div>
+                    </div>
+
+                    <span class="titleContaOrigem">Rooxo - R$1.710,34</span>
+
+                    <div class="destinoInfo">
+                        <div class="linhaSup">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>CNPJ: </b></span>
+                                <span>24.911.931/0769-63</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Código do Banco: </b></span>
+                                <span>102</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Agência: </b></span>
+                                <span>1</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Conta: </b></span>
+                                <span>64566</span>
+                            </div>
+                        </div>
+                        <div class="linhaInf">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Tipo de Pagamento: </b></span>
+                                <span>02 - Impostos</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Data de Vencimento: </b></span>
+                                <span>03/05/2021</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Moeda: </b></span>
+                                <span>REA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="destinoPagamento">
+                    <div class="rodape">
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-primary" style="width: 90px;">Aprovar</button>
+                        </div>
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-secondary" style="width: 90px;">Editar</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger" style="width: 90px;">Rejeitar</button>
+                        </div>
+                    </div>
+
+                    <span class="titleContaOrigem">Jabbercube - R$9.052,11</span>
+
+                    <div class="destinoInfo">
+                        <div class="linhaSup">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>CNPJ: </b></span>
+                                <span>55.551.506/9221-40</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Código do Banco: </b></span>
+                                <span>104</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Agência: </b></span>
+                                <span>1</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Conta: </b></span>
+                                <span>79410</span>
+                            </div>
+                        </div>
+                        <div class="linhaInf">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Tipo de Pagamento: </b></span>
+                                <span>01 - Consumo</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Data de Vencimento: </b></span>
+                                <span>04/04/2021</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Moeda: </b></span>
+                                <span>009</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="destinoPagamento">
+                    <div class="rodape">
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-primary" style="width: 90px;">Aprovar</button>
+                        </div>
+                        <div style="height: 40px;">
+                            <button type="button" class="btn btn-secondary" style="width: 90px;">Editar</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-danger" style="width: 90px;">Rejeitar</button>
+                        </div>
+                    </div>
+
+                    <span class="titleContaOrigem">Babbleopia - R$2.947,76</span>
+
+                    <div class="destinoInfo">
+                        <div class="linhaSup">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>CNPJ: </b></span>
+                                <span>99.247.941/2082-10</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Código do Banco: </b></span>
+                                <span>105</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Agência: </b></span>
+                                <span>1</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Conta: </b></span>
+                                <span>11864</span>
+                            </div>
+                        </div>
+                        <div class="linhaInf">
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Tipo de Pagamento: </b></span>
+                                <span>01 - Consumo</span>
+                            </div>
+                            <div style="float: left;" class="listInfo">
+                                <span><b>Data de Vencimento: </b></span>
+                                <span>04/02/2021</span>
+                            </div>
+                            <div class="listInfo">
+                                <span><b>Moeda: </b></span>
+                                <span>009</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+    <script>
+        $('.btn.btn-primary').on('click', function () {
+            $(this).parent().parent().parent().hide("fast")
+            iziToast.success({
+                title: 'Sucesso',
+                backgroundColor: '#a7e1ff',
+                message: 'Pagamento enviado com sucesso!',
+            });
+        })
+    </script>
+</html>
