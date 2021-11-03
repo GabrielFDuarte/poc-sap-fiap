@@ -43,12 +43,12 @@ Exemplos de requisições para os endpoints listados anteriormente:
     "valor": "5110.4"
 }
 ```
-Realiza o envio de um novo pagamento a ser realizado.
+Interface responsável por enviar pagamento do App para a Instituição Financeira.
 
 
 `POST/webhookDevolucao`
 
-Webhook de retorno do banco após a realização de um pagamento.
+Interface Webhook responsável por enviar o Comprovante de Efetivação do Pagamento da Instituição Financeira para o App.
 
 
 `POST/consultaComprovante`
@@ -59,7 +59,7 @@ Webhook de retorno do banco após a realização de um pagamento.
     "idAutenticacao": "11248361276882915492205735513884001859286865258817"
 }
 ```
-Consulta um extrato de pagamento realizado através de seu ID.
+Interface responsável por consultar o Comprovante do Pagamento da Instituição Financeira para o App.
 
 
 `POST/extratoPagamentos`
@@ -72,7 +72,7 @@ Consulta um extrato de pagamento realizado através de seu ID.
     "dataLimite": "31/12/21"
 }
 ```
-Realiza uma busca a partir do CNPJ de origem e um intervalo de tempo para identificação de pagamentos realizados.
+Interface responsável por receber o Extrato de Pagamentos da Instituição Financeira para o App.
 
 
 ## Tecnologias
